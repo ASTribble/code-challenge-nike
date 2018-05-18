@@ -13,7 +13,11 @@ app.use(morgan('tiny'));
 
 
 app.get('/', (req, res) => {
-  res.json(users);
+  const response = {
+    length: users.length,
+    users
+  };
+  res.json(response);
 });
 
 app.get('/:id', (req, res) => {
@@ -22,16 +26,50 @@ app.get('/:id', (req, res) => {
     tenInWeek: 0
   };
 
-  const user = users
-    .filter(user => user.user_id === req.params.id)
+
+  //filter for user_id coming in
+  //assuming it's a valid id at this point
+  //sort in chronological order based on start time of activity
+  //currently useing library for ease
+  const userSessions = users
+    .filter(user => user.user_id === req.params.id) 
     .sort((a, b) => moment(a.start) - moment(b.start));
 
-  // for(let i in user){
-  //   if(user[1][])
-  // }
-  const shortUser = user.slice(0, 9);
-  // res.json(shortUser);
-  res.json(shortUser.map(i => moment(i.start).add(1, 'days').format('dddd')));
+    //question 1:  Return how many times ran > 1km three times in a row
+  let runCounter = 1;
+
+  for (let i = 0; i < userSessions.length - 1; i++){
+
+    if(runCounter === 3){
+      answers.threeInRow++;
+      runCounter = 1;
+    }
+    // console.log('user[i+1]', user[i+1]);
+
+    const thisSession = userSessions[i];
+    const nextSession = userSessions[i+1];
+    const today = moment(thisSession.start).calendar();
+    const tomorrow = moment(today).add(1, 'days').calendar();
+    const nextDate = moment(nextSession.start).calendar();
+
+    if(thisSession.type === 'run' && thisSession.distance > 1){
+      console.log('tomorrow:', tomorrow, 'nextDate:', nextDate, tomorrow === nextDate);
+      if(tomorrow === nextDate){
+        runCounter++;
+      }
+      else{ runCounter = 1;}
+    }
+    console.log('runCounter', runCounter);
+  }
+
+  console.log('answers.threeInRow', answers.threeInRow);
+
+
+ 
+  const tenSessions = userSessions.slice(0, 9);
+  res.json(tenSessions);
+  // res.json(shortUser.map(i => moment(i.start).add(1, 'days').format('dddd')));
+  // res.json(shortUser.map(i => i.type));
 });
 
 
