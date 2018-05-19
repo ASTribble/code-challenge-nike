@@ -1,18 +1,19 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
 const morgan = require('morgan');
 const moment = require('moment');
+
 const users = require('./users');
 
-
-// app.use(bodyParser.json());
 app.use(morgan('tiny'));
 
+// this endpoint will return all of the json files from the data set as well as it's length
+// and makes it easy to find a valid user_id to test with.
+// I'm making all the assumptions that the data is good, valid, and consistent, and that there will be no errors
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, err) => {
   const response = {
     length: users.length,
     users
@@ -20,69 +21,118 @@ app.get('/', (req, res) => {
   res.json(response);
 });
 
+
+// this endpoint will be returning the information about a given user
+// i'm again assuming the req.params.id is a valid one and will not have errors
+
 app.get('/:id', (req, res) => {
+
+  // answers will store the answers to all the questions for ease of returning
   const answers = {
+    user: req.params.id,
     threeInRow: 0,
-    tenInWeek: 0
+    tenInWeek: 0,
+    shortestStride: null,
+    longestStride: null
   };
 
-
-  //filter for user_id coming in
-  //assuming it's a valid id at this point
+  //filter the users data for a match to the user_id coming in
   //sort in chronological order based on start time of activity
-  //currently useing library for ease
-  const userSessions = users
-    .filter(user => user.user_id === req.params.id) 
+  //currently using a library - moment - for easy date manipulation and comparison 
+
+  const userRuns = users
+    .filter(user => (user.user_id === req.params.id) && (user.type === 'run'))
     .sort((a, b) => moment(a.start) - moment(b.start));
 
-    //question 1:  Return how many times ran > 1km three times in a row
+  
+  //===== QUESTION 1: =============================================
+  //+++++ Return how many times ran > 1km three days in a row ++++++++
+
   let runCounter = 1;
 
-  for (let i = 0; i < userSessions.length - 1; i++){
+  for (let i = 0; i < userRuns.length - 1; i++){
 
     if(runCounter === 3){
       answers.threeInRow++;
       runCounter = 1;
     }
-    // console.log('user[i+1]', user[i+1]);
 
-    const thisSession = userSessions[i];
-    const nextSession = userSessions[i+1];
-    const today = moment(thisSession.start).calendar();
+    const thisRun = userRuns[i];
+    const nextRun = userRuns[i+1];
+  
+    const today = moment(thisRun.start).calendar();
     const tomorrow = moment(today).add(1, 'days').calendar();
-    const nextDate = moment(nextSession.start).calendar();
+    const nextDate = moment(nextRun.start).calendar();
 
-    if(thisSession.type === 'run' && thisSession.distance > 1){
-      console.log('tomorrow:', tomorrow, 'nextDate:', nextDate, tomorrow === nextDate);
+    if(thisRun.distance > 1){
       if(tomorrow === nextDate){
         runCounter++;
       }
       else{ runCounter = 1;}
     }
-    console.log('runCounter', runCounter);
+  }
+  if(runCounter === 3){
+    answers.threeInRow++;
   }
 
-  console.log('answers.threeInRow', answers.threeInRow);
+
+  //===========  QUESTION 2 ==========================================================
+  //++++++ Ran >10km in calendar week (M-F) +++++++++++++++++++++++++++++++++++++++++
+  let tenInWeek = 0;
+  let weeklyDistance = 0;
+  let currentWeek = null;
+
+  for(let i = 0; i < userRuns.length; i++){
+   
+    const thisRun = userRuns[i].start;
+    const thisWeek = moment(thisRun).isoWeek();
+    const thisDistance = userRuns[i].distance;
+
+    if(currentWeek === null){
+      currentWeek = thisWeek; 
+    }
+
+    if(thisWeek === currentWeek){
+      weeklyDistance += thisDistance;
+    }
+    else{
+      if(weeklyDistance > 10){
+        tenInWeek++;
+      }
+      weeklyDistance = thisDistance;
+      currentWeek = thisWeek;
+    } 
+  }
+  answers.tenInWeek = tenInWeek;
 
 
- 
-  const tenSessions = userSessions.slice(0, 9);
-  res.json(tenSessions);
-  // res.json(shortUser.map(i => moment(i.start).add(1, 'days').format('dddd')));
-  // res.json(shortUser.map(i => i.type));
+  //============ OUESTION THREE ========================================================================
+  // ++ Shortest stride length at what distance and Longest stride length at what distance ++++++++++
+
+  const strideStats = userRuns
+    .filter (run => (run.steps !== undefined) && (run.steps !== 0))
+    .map( run => {
+      return ({
+        strides: run.steps, 
+        'distance(km)': parseFloat((run.distance).toFixed(4)),
+        'average stride(m)': parseFloat((run.distance*1000/run.steps).toFixed(2))
+      });
+    })
+    .sort((a,b) => a['average stride(m)'] - b['average stride(m)']);
+
+  answers.shortestStride = strideStats[0];
+  answers.longestStride = strideStats[strideStats.length - 1];
+
+
+  // returns the answers object as json
+  return res.json(answers);
 });
-
-
-
-
-
-
 
 
 //============ PORT LISTENING ==============================
 
 app.listen(8080, function () {
-  console.log('Example app listening on port 8080');
+  console.log('App listening on port 8080');
 });
 
 
@@ -106,11 +156,16 @@ app.listen(8080, function () {
 // we probably want to sort by date
  
 // to answer first question, we need to know 
+// if type is distance
 // if distance > 1
 // count for if start day === previous start day + 1
 // count for when consec start day === 3
 
 // to answer second question, we need 
 // to sort into weeks
+// week runs M-F
 // counter for each week, if sum of distance > 10
+
+//to answer third question, we need to 
+
   
