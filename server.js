@@ -5,7 +5,7 @@ const app = express();
 const morgan = require('morgan');
 const moment = require('moment');
 
-const users = require('./users');
+const activities = require('./activities');
 
 app.use(morgan('tiny'));
 
@@ -15,8 +15,8 @@ app.use(morgan('tiny'));
 
 app.get('/', (req, res, err) => {
   const response = {
-    length: users.length,
-    users
+    'number of entries': activities.length,
+    activities
   };
   res.json(response);
 });
@@ -36,11 +36,11 @@ app.get('/:id', (req, res) => {
     longestStride: null
   };
 
-  //filter the users data for a match to the user_id coming in
+  //filter the activities data for a match to the user_id coming in
   //sort in chronological order based on start time of activity
   //currently using a library - moment - for easy date manipulation and comparison 
 
-  const userRuns = users
+  const userRuns = activities
     .filter(user => (user.user_id === req.params.id) && (user.type === 'run'))
     .sort((a, b) => moment(a.start) - moment(b.start));
 

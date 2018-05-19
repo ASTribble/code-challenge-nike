@@ -2,9 +2,10 @@
   "name": "scotts-solution",
   "version": "1.0.0",
   "description": "scott's solution to the code challenge for backend position",
-  "main": "hereWeGo.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "author": "A. Scott Tribble",
   "license": "ISC",
