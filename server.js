@@ -13,7 +13,7 @@ app.use(morgan('tiny'));
 // and makes it easy to find a valid user_id to test with.
 // I'm making all the assumptions that the data is good, valid, and consistent, and that there will be no errors
 
-app.get('/', (req, res, err) => {
+app.get('/', (req, res) => {
   const response = {
     'number of entries': activities.length,
     activities
@@ -88,6 +88,10 @@ app.get('/:id', (req, res) => {
     const thisWeek = moment(thisRun).isoWeek();
     const thisDistance = userRuns[i].distance;
 
+    // since the entries are already sorted by start time, 
+    // I'm assuming that the weeks will be in ascending order,
+    // and there will be no conflict with repeated week numbers that have wrapped to the next year
+  
     if(currentWeek === null){
       currentWeek = thisWeek; 
     }
@@ -166,6 +170,9 @@ app.listen(8080, function () {
 // week runs M-F
 // counter for each week, if sum of distance > 10
 
-//to answer third question, we need to 
+//to answer third question, 
+// we need to get distance / steps for each run 
+// then sort by that value
+// and return the first and last items in the sorted array
 
   
