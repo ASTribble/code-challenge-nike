@@ -4,7 +4,28 @@ I left the original challenge / readme at the end of this file.
 
 ## Solution Environment 
 
-This solution is presented in the form of a Node http server.  
+This solution is presented in Node.js.
+You will need Node.js and npm installed to run it.
+
+from the command line:
+
+git clone the repo from Github.  
+
+cd into the directory.
+
+npm install.
+
+to run the program from the command line:
+
+node hereWeGo.js 72eff89c74cc57178e02f103187ad579
+
+72eff89c74cc57178e02f103187ad579
+6bd5f3c04e6b5279aca633c2a245dd9c
+4e7aaa167b9b5ff7b9b3a22dee8c2085
+
+
+
+
 
 
 
