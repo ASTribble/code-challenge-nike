@@ -2,19 +2,13 @@
   "name": "scotts-solution",
   "version": "1.0.0",
   "description": "scott's solution to the code challenge for backend position",
-  "main": "server.js",
+  "main": "hereWeGo.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "A. Scott Tribble",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "glob": "^7.1.2",
-    "moment": "^2.22.1",
-    "morgan": "^1.9.0",
-    "nodemon": "^1.17.4"
+    "moment": "^2.22.1"
   }
 }

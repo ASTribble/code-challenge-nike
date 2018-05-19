@@ -1,3 +1,28 @@
+# Code Challenge Solution for Backend Software Engineer Position
+
+I left the original challenge / readme at the end of this file.
+
+## Solution Environment 
+
+This solution is presented in the form of a Node http server.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Backend Software Engineer
 
 Our team creates and supports services that power features in the Nike Run Club and Nike Training Club mobile apps. Most of these features are grouped into what we call "motivational" which are intended to keep our customers running with our app.
