@@ -8,7 +8,7 @@ This solution is presented in Node.js.
 You will need Node.js and npm installed to run it.
 
 
-from the command line:
+### From the command line:
 
 - `git clone https://github.com/ASTribble/code-challenge-nike` 
 
@@ -17,18 +17,18 @@ from the command line:
 - `npm install`
 
 
-to run the program from the command line:
+### To run the program from the command line:
 
 `node hereWeGo.js 72eff89c74cc57178e02f103187ad579`
 
-where `72eff89c74cc57178e02f103187ad579` is a valid user id passed in to hereWeGo.js
+Where `72eff89c74cc57178e02f103187ad579` is a valid user id passed in to hereWeGo.js
 
 
 These are a few valid user ids that can be used as inputs:
 
-72eff89c74cc57178e02f103187ad579   
-6bd5f3c04e6b5279aca633c2a245dd9c   
-4e7aaa167b9b5ff7b9b3a22dee8c2085   
+- 72eff89c74cc57178e02f103187ad579   
+- 6bd5f3c04e6b5279aca633c2a245dd9c   
+- 4e7aaa167b9b5ff7b9b3a22dee8c2085   
 
 
 
