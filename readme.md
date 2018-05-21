@@ -2,6 +2,7 @@
 
 I left the original challenge / readme at the end of this file.  
 
+5/21/2018:    
 This is a first pass at the challenge, and I am currently making the assumption that the user id passed in will be valid and contained in the data set.
 
 ## Solution Environment 
