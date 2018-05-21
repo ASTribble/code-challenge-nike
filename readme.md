@@ -11,7 +11,7 @@ This solution is presented in Node.js.
 You will need Node.js and npm installed to run it.
 
 
-### From the command line:
+### To install the program from the command line:
 
 - `git clone https://github.com/ASTribble/code-challenge-nike` 
 
