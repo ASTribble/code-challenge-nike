@@ -49,8 +49,8 @@ These are a few valid user ids that can be used as inputs:
 
 
 
----- Original Challenge Description -----
-
+--------------------------------------------------------------------
+Original Challenge Description:
 
 
 # Backend Software Engineer
