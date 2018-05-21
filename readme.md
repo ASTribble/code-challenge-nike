@@ -12,9 +12,9 @@ from the command line:
 
 - `git clone https://github.com/ASTribble/code-challenge-nike` 
 
-- cd into code-challenge-nike
+- `cd code-challenge-nike`
 
-- npm install
+- `npm install`
 
 
 to run the program from the command line:
