@@ -23,11 +23,11 @@ When you pass-in a valid user id to the program, an object will be printed out t
     }
 }
 ```
-`"user"` is the user id you passed in.  The rest of the information applies to this specific user.   
-`"threeInRow"` is the number of times the user ran more than 1km for three consecutive days.
-`"tenInWeek"` is the number of times the user ran more than 10km in a given calendar week.
-`"shortestStride"` shows information for the user's shortest average stride-length.
-`"longestStride"` shows information for the users's longest average stride-length.
+`"user"` is the user id you passed in.  The rest of the information applies to this specific user.      
+`"threeInRow"` is the number of times the user ran more than 1km for three consecutive days.   
+`"tenInWeek"` is the number of times the user ran more than 10km in a given calendar week.   
+`"shortestStride"` shows information for the user's shortest average stride-length.   
+`"longestStride"` shows information for the users's longest average stride-length.   
 
 ## Solution Environment 
 
