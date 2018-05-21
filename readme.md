@@ -5,10 +5,35 @@ I left the original challenge / readme at the end of this file.
 5/21/2018:    
 This is a first pass at the challenge, and I am currently making the assumption that the user id passed in will be valid and contained in the data set.
 
+When you pass-in a valid user id to the program, an object will be printed out to the console:
+```
+{
+    "user": "4e7aaa167b9b5ff7b9b3a22dee8c2085",
+    "threeInRow": 5,
+    "tenInWeek": 8,
+    "shortestStride": {
+        "strides": 3246,
+        "distance(km)": 1.9801,
+        "average stride(m)": 0.61
+    },
+    "longestStride": {
+        "strides": 193,
+        "distance(km)": 0.3066,
+        "average stride(m)": 1.59
+    }
+}
+```
+`"user"` is the user id you passed in.  The rest of the information applies to this specific user.   
+`"threeInRow"` is the number of times the user ran more than 1km for three consecutive days.
+`"tenInWeek"` is the number of times the user ran more than 10km in a given calendar week.
+`"shortestStride"` shows information for the user's shortest average stride-length.
+`"longestStride"` shows information for the users's longest average stride-length.
+
 ## Solution Environment 
 
 This solution is presented in Node.js.
 You will need Node.js and npm installed to run it.
+If you have homebrew installed, you can install these both by running `brew install node` from the command line.
 
 
 ### To install the program from the command line:
