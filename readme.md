@@ -7,17 +7,24 @@ I left the original challenge / readme at the end of this file.
 This solution is presented in Node.js.
 You will need Node.js and npm installed to run it.
 
+
 from the command line:
 
-git clone the repo from Github.  
+- `git clone https://github.com/ASTribble/code-challenge-nike` 
 
-cd into the directory.
+- cd into code-challenge-nike
 
-npm install.
+- npm install
+
 
 to run the program from the command line:
 
-node hereWeGo.js 72eff89c74cc57178e02f103187ad579
+`node hereWeGo.js 72eff89c74cc57178e02f103187ad579`
+
+where 72eff89c74cc57178e02f103187ad579 is a valid user id passed in to hereWeGo.js
+
+
+These are a few valid user ids that can be used as inputs:
 
 72eff89c74cc57178e02f103187ad579
 6bd5f3c04e6b5279aca633c2a245dd9c
