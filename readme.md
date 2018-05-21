@@ -1,6 +1,7 @@
 # Code Challenge Solution for Backend Software Engineer Position
 
-I left the original challenge / readme at the end of this file.
+I left the original challenge / readme at the end of this file.     
+This is a first pass at the challenge, and I am currently making the assumptions that the user id passed in will be valid and contained in the data set.
 
 ## Solution Environment 
 
